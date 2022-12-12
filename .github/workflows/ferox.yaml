@@ -11,26 +11,33 @@ jobs:
 
       - name: Setup golang
         uses: actions/setup-go@v2
-        #with:
-          #go-version: 1.18
-          #cache: 'go'
-          #path: /home/runner/go
-          #key: ${{ runner.os }}-go
+        with:
+          go-version: 1.18
+          cache: 'go'
+          path: /home/runner/go
+          key: ${{ runner.os }}-go
 
       - name: Setup Dependencies
         run: |
           #nohup --version
           sudo apt-get update
-          #sudo apt-get install libpcap-dev
+          sudo apt-get install libpcap-dev
           #rm -rf test.html
-          curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash &
-          feroxbuster --help
+          #curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash &
+          #go install 
+          #feroxbuster --help
+          
+      - name: Setting up Web-Discovery tools
+        env:
+          GO111MODULE: on
+        run: |
+          go install -v github.com/ffuf/ffuf@latest
 
       - name: Running Scanner
         run: |
           #cat urls.txt
           #for i in $(cat urls.txt); do katana -u $i -cs ${i#*//} -aff -H -jc -d 7 -proxy http://127.0.0.1:7777; done
-          for i in $(cat urls.txt); do feroxbuster -u $i -w mid.txt | tee result.txt
+          for i in $(cat urls.txt); do ffuf -u $i/FUZZ -w mid.txt -t 400 | tee result.txt
           #katana -u "http://testasp.vulnweb.com" -aff -H -jc -d 7 
           cat test.html
         shell: bash
