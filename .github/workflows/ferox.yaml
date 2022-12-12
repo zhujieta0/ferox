@@ -32,14 +32,14 @@ jobs:
           GO111MODULE: on
         run: |
           go install -v github.com/ffuf/ffuf@latest
-
+          ffuf -h
       - name: Running Scanner
         run: |
           #cat urls.txt
           #for i in $(cat urls.txt); do katana -u $i -cs ${i#*//} -aff -H -jc -d 7 -proxy http://127.0.0.1:7777; done
           for i in $(cat urls.txt); do ffuf -u $i/FUZZ -w mid.txt -t 400 | tee result.txt
           #katana -u "http://testasp.vulnweb.com" -aff -H -jc -d 7 
-          cat test.html
+          #cat test.html
         shell: bash
 
       - name: Sorting the output results
