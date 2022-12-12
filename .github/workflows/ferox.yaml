@@ -37,7 +37,7 @@ jobs:
         run: |
           #cat urls.txt
           #for i in $(cat urls.txt); do katana -u $i -cs ${i#*//} -aff -H -jc -d 7 -proxy http://127.0.0.1:7777; done
-          for i in $(cat urls.txt); do ffuf -u $i/FUZZ -w mid.txt -t 400 | tee result.txt
+          for i in $(cat urls.txt); do ffuf -u $i/FUZZ -w mid.txt -t 400 | tee result.txt ;done
           #katana -u "http://testasp.vulnweb.com" -aff -H -jc -d 7 
           #cat test.html
         shell: bash
