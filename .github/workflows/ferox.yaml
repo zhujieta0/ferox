@@ -24,13 +24,13 @@ jobs:
           #sudo apt-get install libpcap-dev
           #rm -rf test.html
           curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash &
-          ./feroxbuster --help
+          feroxbuster --help
 
       - name: Running Scanner
         run: |
           #cat urls.txt
           #for i in $(cat urls.txt); do katana -u $i -cs ${i#*//} -aff -H -jc -d 7 -proxy http://127.0.0.1:7777; done
-          for i in $(cat urls.txt); do ./feroxbuster -u $i -w mid.txt | tee result.txt
+          for i in $(cat urls.txt); do feroxbuster -u $i -w mid.txt | tee result.txt
           #katana -u "http://testasp.vulnweb.com" -aff -H -jc -d 7 
           cat test.html
         shell: bash
