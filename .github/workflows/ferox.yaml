@@ -24,6 +24,7 @@ jobs:
           #sudo apt-get install libpcap-dev
           #rm -rf test.html
           curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash &
+          ./feroxbuster --help
 
       - name: Running Scanner
         run: |
