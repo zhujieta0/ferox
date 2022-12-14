@@ -1,0 +1,2 @@
+[2Kping                    [Status: 200, Size: 7, Words: 1, Lines: 1, Duration: 252ms][0m
+[2Ksping                   [Status: 200, Size: 7, Words: 1, Lines: 1, Duration: 66ms][0m
